@@ -73,13 +73,22 @@ List.prototype.append = function(value) {
 List.prototype.prepend = function(value) {
     var node = new Node(value);
     if (this._length > 1) {
-        this.tail.next = this.tail;
-        node.next = this.tail.next;
-        node.previous = this.tail.previous;
-        this.tail.previous.next = node;
-        this.tail.next.previous = node;
-        this.tail = this.tail.next;
-        this.tail.next = null;
+            var currentNode = this.head,
+            position = 1;
+            while (position <= this._length) {
+                if (position === this._length){
+                    node.next = currentNode;
+                    node.previous = currentNode.previous;
+                    currentNode.previous.next = node;
+                    currentNode.previous = node;
+                    break;
+                }else{
+                    currentNode = currentNode.next;
+                    position++;
+                }
+            }
+            this._length++;
+            return "Elment is added!";
     } else if (this._length === 1){
         this.head = node;
         this.head.next = this.tail;
@@ -192,6 +201,75 @@ this.tail = temp;
 return "List is reversed!";
 };
 
+//---------------------------------------------------------
+//Прототип метода добавления элемента в указанную позицию
+List.prototype.insertAt = function(atPos, val) {
+    var currentNode = this.head,
+    position = 1;
+    var node = new Node(val);
+    
+    if (this._length === 0 ){
+        return "The list is empty";
+    }else if (atPos < 1 || atPos > this._length) {
+        return "It is wrong index. (should be from 1 to " + this._length + ")";
+    }
+
+while (position <= this._length) {
+    if (atPos === 1 && position === atPos){
+        node.next = currentNode;
+        node.previous = null;
+        currentNode.previous = node;
+        this.head = node;
+        break;
+    }else if (position === atPos){
+        node.next = currentNode;
+        node.previous = currentNode.previous;
+        currentNode.previous.next = node;
+        currentNode.previous = node;
+        break;
+    }else{
+        currentNode = currentNode.next;
+        position++;
+    }
+}
+this._length++;
+return "Elment is added!";
+};
+
+
+//---------------------------------------------------------
+//Прототип метода удаления элемента из указанной позиции
+List.prototype.deleteAt = function(atPos) {
+    var currentNode = this.head,
+    position = 1;
+    
+    if (this._length === 0 ){
+        return "The list is empty";
+    }else if (atPos < 1 || atPos > this._length) {
+        return "It is wrong index. (should be from 1 to " + this._length + ")";
+    }
+
+while (position <= this._length) {
+    if (atPos === 1 && position === atPos){
+        this.head = currentNode.next;
+        this.head.previous = null;
+        break;
+    }else if (atPos === this._length && position === atPos){
+        this.tail = currentNode.previous;
+        this.tail.next = null;
+        break;
+    } else if (position === atPos){
+        currentNode.previous.next = currentNode.next;
+        currentNode.next.previous = currentNode.previous;
+        break;
+    }else{
+        currentNode = currentNode.next;
+        position++;
+    }
+}
+this._length--;
+return "Elment is deleted!";
+};
 
 //---------------------------------------------------------
 const doubleLi = new List();
@@ -211,4 +289,16 @@ console.log(doubleLi.each(plus1));
 console.log(doubleLi.each(pow2));
 console.log(doubleLi.reverse());
 console.log("List: ");
+console.log(doubleLi.view());
+console.log(doubleLi.insertAt(1, 100));
+console.log(doubleLi.view());
+console.log(doubleLi.insertAt(2, 150));
+console.log(doubleLi.view());
+console.log(doubleLi.insertAt(5, 200));
+console.log(doubleLi.view());
+console.log(doubleLi.deleteAt(6));
+console.log(doubleLi.view());
+console.log(doubleLi.deleteAt(1));
+console.log(doubleLi.view());
+console.log(doubleLi.deleteAt(2));
 console.log(doubleLi.view());
