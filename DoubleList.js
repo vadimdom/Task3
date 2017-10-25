@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-//Класс списка
+//List class
 class List {
     constructor() {
         this._length = 0;
@@ -10,7 +10,7 @@ class List {
 
 
 //---------------------------------------------------------
-//Создание узла
+//Creating of node
 function Node(value) {
     this.data = value;
     this.previous = null;
@@ -19,20 +19,20 @@ function Node(value) {
 
 
 //---------------------------------------------------------
-//Функция прибавления 1
+//Addition  1 function
 var  plus1 = function(val) {
     return val+1;
 }
 
 
 //---------------------------------------------------------
-//Функция возведения в квадрат
+//Squaring function
 var  pow2 = function(val) {
     return val*val;
 }
 
 //---------------------------------------------------------
-//Прототип метода вывода головы списка
+//Prototype of the list head view method
 List.prototype.getHead = function() {
     if (this._length === 0 ){
         return "The list is empty";
@@ -42,7 +42,7 @@ List.prototype.getHead = function() {
 
 
 //---------------------------------------------------------
-//Прототип метода вывода хвоста списка
+//Prototype of the list tail view method
 List.prototype.getTail = function() {
     if (this._length === 0 ){
         return "The list is empty";
@@ -52,7 +52,7 @@ List.prototype.getTail = function() {
 
 
 //---------------------------------------------------------
-//Прототип метода добавления узла в конец списка
+//Prototype of the method of adding a node to the end of the list
 List.prototype.append = function(value) {
     var node = new Node(value);
     if (this._length) {
@@ -69,7 +69,7 @@ List.prototype.append = function(value) {
 };
 
 //---------------------------------------------------------
-//Прототип метода добавления узла перед хвостом списка
+//Prototype of the method of adding a node before the end of the list
 List.prototype.prepend = function(value) {
     var node = new Node(value);
     if (this._length > 1) {
@@ -87,8 +87,6 @@ List.prototype.prepend = function(value) {
                     position++;
                 }
             }
-            this._length++;
-            return "Elment is added!";
     } else if (this._length === 1){
         this.head = node;
         this.head.next = this.tail;
@@ -103,7 +101,7 @@ List.prototype.prepend = function(value) {
 };
 
 //---------------------------------------------------------
-//Прототип метода показа списка с головы
+//Prototype of the method of displaying the list from the head
 List.prototype.view = function() {
     var currentNode = this.head,
     position = 1, str = "";
@@ -118,7 +116,7 @@ return str;
 
 
 //---------------------------------------------------------
-//Прототип метода вывода значения элемента по заданному номеру
+//Prototype of the method for displaying the value of an element by a given index
 List.prototype.at = function(atPos) {
     var currentNode = this.head,
     position = 1;
@@ -141,7 +139,7 @@ while (position <= this._length) {
 
 
 //---------------------------------------------------------
-//Прототип метода вывода номера элемента в списке по его значению
+//Prototype of the method for displaying the index of an element by a given value
 List.prototype.indexOf = function(value) {
     var currentNode = this.head,
     position = 1;
@@ -158,7 +156,7 @@ return "This value is not in the list.";
 };
 
 //---------------------------------------------------------
-//Прототип метода обработки каждого элемента списка
+//Prototype of the method for processing each list element
 List.prototype.each = function(fun) {
     var currentNode = this.head,
     position = 1;
@@ -172,7 +170,7 @@ return "It's okay!";
 };
 
 //---------------------------------------------------------
-//Прототип метода разворота списка
+//Prototype of the method for the list reverse
 List.prototype.reverse = function() {
     var currentNode = this.head,
     position = 1, temp;
@@ -202,7 +200,7 @@ return "List is reversed!";
 };
 
 //---------------------------------------------------------
-//Прототип метода добавления элемента в указанную позицию
+//Prototype of the method for adding an element to the given position
 List.prototype.insertAt = function(atPos, val) {
     var currentNode = this.head,
     position = 1;
@@ -233,12 +231,12 @@ while (position <= this._length) {
     }
 }
 this._length++;
-return "Elment is added!";
+return "Element is added!";
 };
 
 
 //---------------------------------------------------------
-//Прототип метода удаления элемента из указанной позиции
+//Prototype of the method for deleting an element at the given position
 List.prototype.deleteAt = function(atPos) {
     var currentNode = this.head,
     position = 1;
@@ -268,37 +266,5 @@ while (position <= this._length) {
     }
 }
 this._length--;
-return "Elment is deleted!";
+return "Element is deleted!";
 };
-
-//---------------------------------------------------------
-const doubleLi = new List();
-doubleLi.append(10);
-doubleLi.append(2);
-doubleLi.prepend(5);
-
-console.log(doubleLi.view());
-console.log("Head: ");
-console.log(doubleLi.getHead());
-console.log("Tail: ");
-console.log(doubleLi.getTail());
-console.log("The index of the element to search for: ");
-console.log(doubleLi.indexOf(+(prompt("Введите искомое значение: "))));
-console.log(doubleLi.at(+(prompt("Введите номер элемента списка: "))));
-console.log(doubleLi.each(plus1));
-console.log(doubleLi.each(pow2));
-console.log(doubleLi.reverse());
-console.log("List: ");
-console.log(doubleLi.view());
-console.log(doubleLi.insertAt(1, 100));
-console.log(doubleLi.view());
-console.log(doubleLi.insertAt(2, 150));
-console.log(doubleLi.view());
-console.log(doubleLi.insertAt(5, 200));
-console.log(doubleLi.view());
-console.log(doubleLi.deleteAt(6));
-console.log(doubleLi.view());
-console.log(doubleLi.deleteAt(1));
-console.log(doubleLi.view());
-console.log(doubleLi.deleteAt(2));
-console.log(doubleLi.view());

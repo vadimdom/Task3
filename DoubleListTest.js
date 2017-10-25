@@ -1,0 +1,31 @@
+//---------------------------------------------------------
+const doubleLi = new List();
+doubleLi.append(10);
+doubleLi.append(2);
+doubleLi.prepend(5);
+
+console.log(doubleLi.view());
+console.log("Head: ");
+console.log(doubleLi.getHead());
+console.log("Tail: ");
+console.log(doubleLi.getTail());
+console.log("The index of the element to search for: ");
+console.log(doubleLi.indexOf(+(prompt("Введите искомое значение: "))));
+console.log(doubleLi.at(+(prompt("Введите номер элемента списка: "))));
+console.log(doubleLi.each(plus1));
+console.log(doubleLi.each(pow2));
+console.log(doubleLi.reverse());
+console.log("List: ");
+console.log(doubleLi.view());
+console.log(doubleLi.insertAt(1, 100));
+console.log(doubleLi.view());
+console.log(doubleLi.insertAt(2, 150));
+console.log(doubleLi.view());
+console.log(doubleLi.insertAt(5, 200));
+console.log(doubleLi.view());
+console.log(doubleLi.deleteAt(6));
+console.log(doubleLi.view());
+console.log(doubleLi.deleteAt(1));
+console.log(doubleLi.view());
+console.log(doubleLi.deleteAt(2));
+console.log(doubleLi.view());
