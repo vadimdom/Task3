@@ -1,31 +1,30 @@
 //---------------------------------------------------------
-const doubleLi = new List();
-doubleLi.append(10);
-doubleLi.append(2);
-doubleLi.prepend(5);
-
-console.log(doubleLi.view());
-console.log("Head: ");
-console.log(doubleLi.getHead());
-console.log("Tail: ");
-console.log(doubleLi.getTail());
-console.log("The index of the element to search for: ");
-console.log(doubleLi.indexOf(+(prompt("Введите искомое значение: "))));
-console.log(doubleLi.at(+(prompt("Введите номер элемента списка: "))));
-console.log(doubleLi.each(plus1));
-console.log(doubleLi.each(pow2));
-console.log(doubleLi.reverse());
-console.log("List: ");
-console.log(doubleLi.view());
-console.log(doubleLi.insertAt(1, 100));
-console.log(doubleLi.view());
-console.log(doubleLi.insertAt(2, 150));
-console.log(doubleLi.view());
-console.log(doubleLi.insertAt(5, 200));
-console.log(doubleLi.view());
-console.log(doubleLi.deleteAt(6));
-console.log(doubleLi.view());
-console.log(doubleLi.deleteAt(1));
-console.log(doubleLi.view());
-console.log(doubleLi.deleteAt(2));
-console.log(doubleLi.view());
+const List = new DoubleList();
+List.append(+(prompt("Введите элемент, который вставить в конец списка: ", "10")));
+List.append(+(prompt("Введите элемент, который вставить в конец списка: ", "2")));
+List.prepend(+(prompt("Введите элемент, который вставить в начало списка: ", "5")));
+//---------------------------------------------------------
+//Addition  1 function
+var  plus1 = function(val) {
+    return val+1;
+}
+//---------------------------------------------------------
+//Squaring function
+var  pow2 = function(val) {
+    return val*val;
+}
+console.log(List.toString());
+console.log(List.getHead());
+console.log(List.getTail());
+console.log(List.indexOf(+(prompt("Введите искомое значение: ", "2"))));
+console.log(List.at(+(prompt("Введите номер элемента списка: ", "2"))));
+console.log(List.each(plus1));
+console.log(List.each(pow2));
+console.log(List.reverse());
+console.log(List.insertAt(+(prompt("Введите позицию, на которую вставить: ", "0")), +(prompt("Введите элемент, который вставить: ", "100"))));
+console.log(List.insertAt(+(prompt("Введите позицию, на которую вставить: ", "1")), +(prompt("Введите элемент, который вставить: ", "150"))));
+console.log(List.insertAt(+(prompt("Введите позицию, на которую вставить: ", "4")), +(prompt("Введите элемент, который вставить: ", "200"))));
+console.log(List.deleteAt(+(prompt("Введите номер элемента, который удалить: ", "5"))));
+console.log(List.deleteAt(+(prompt("Введите номер элемента, который удалить: ", "0"))));
+console.log(List.deleteAt(+(prompt("Введите номер элемента, который удалить: ", "1"))));
+console.log(List);
