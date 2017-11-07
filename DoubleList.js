@@ -2,8 +2,8 @@
 //List function
 function DoubleList() {
     this._length = 0;
-    this.head = null;
-    this.tail = null;
+    this._head = null;
+    this._tail = null;
 }
 
 
@@ -22,7 +22,7 @@ DoubleList.prototype.getHead = function() {
         throw new Error("The list is empty!");
     }
 
-    return "Head: " + this.head.data;
+    return this._head.data;
 };
 
 
@@ -33,7 +33,7 @@ DoubleList.prototype.getTail = function() {
         throw new Error("The list is empty!");
     }
 
-    return "Tail: " + this.tail.data;
+    return this._tail.data;
 };
 
 
@@ -43,16 +43,15 @@ DoubleList.prototype.append = function(value) {
     var node = new Node(value);
 
     if (this._length) {
-        this.tail.next = node;
-        node.previous = this.tail;
-        this.tail = node;
+        this._tail.next = node;
+        node.previous = this._tail;
+        this._tail = node;
     } else {
-        this.head = node;
-        this.tail = node;
+        this._head = node;
+        this._tail = node;
     }
 
     this._length++;
-    return this.toString();
 };
 
 //---------------------------------------------------------
@@ -61,22 +60,21 @@ DoubleList.prototype.prepend = function(value) {
     var node = new Node(value);
 
     if (this._length >= 1) {
-        node.next = this.head;
-        this.head.previous = node;
-        this.head = node;
+        node.next = this._head;
+        this._head.previous = node;
+        this._head = node;
     } else {
-        this.head = node;
-        this.tail = node;
+        this._head = node;
+        this._tail = node;
     }
 
     this._length++;
-    return this.toString();
 };
 
 //---------------------------------------------------------
 //Prototype of the method of displaying the list from the head
 DoubleList.prototype.toString = function() {
-    var currentNode = this.head, str = "";
+    var currentNode = this._head, str = "";
 
     for (var position = 0; position < this._length; position++) {
         str += currentNode.data + " ";
@@ -90,7 +88,7 @@ DoubleList.prototype.toString = function() {
 //---------------------------------------------------------
 //Prototype of the method for displaying the node by a given index
 DoubleList.prototype._at = function(atPos) {
-    var currentNode = this.head;
+    var currentNode = this._head;
 
     if (this._length === 0 ) {
         throw new Error("The list is empty!");
@@ -119,7 +117,7 @@ DoubleList.prototype.at = function(atPos) {
 //---------------------------------------------------------
 //Prototype of the method for displaying the index of an element by a given value
 DoubleList.prototype.indexOf = function(value) {
-    var currentNode = this.head;
+    var currentNode = this._head;
 
     for (var position = 0; position < this._length; position++) {
         if (currentNode.data === value) {
@@ -135,20 +133,18 @@ DoubleList.prototype.indexOf = function(value) {
 //---------------------------------------------------------
 //Prototype of the method for processing each list element
 DoubleList.prototype.each = function(fun) {
-    var currentNode = this.head;
+    var currentNode = this._head;
 
     for (var position = 0; position < this._length; position++) {
         fun(currentNode.data);
         currentNode = currentNode.next;
     }
-
-    return this.toString();
 };
 
 //---------------------------------------------------------
 //Prototype of the method for the list reverse
 DoubleList.prototype.reverse = function() {
-    var currentNode = this.head, temp;
+    var currentNode = this._head, temp;
 
     for (var position = 0; position < this._length; position++) {
         if (position === 0) {
@@ -166,11 +162,9 @@ DoubleList.prototype.reverse = function() {
         }
     }
 
-    temp = this.head;
-    this.head = this.tail;
-    this.tail = temp;
-
-    return this.toString();
+    temp = this._head;
+    this._head = this._tail;
+    this._tail = temp;
 };
 
 //---------------------------------------------------------
@@ -187,27 +181,23 @@ DoubleList.prototype.insertAt = function(atPos, val) {
         node.next = element;
         this._length++;
     }
-
-    return this.toString();
 };
 
 
 //---------------------------------------------------------
 //Prototype of the method for deleting an element at the given position
 DoubleList.prototype.deleteAt = function(atPos) {
-    var element = this._at(atPos);
-
     if (atPos === 0) {
-        this.head = this.head.next;
-        this.head.previous = null;
+        this._head = this._head.next;
+        this._head.previous = null;
     } else if (atPos === this._length-1) {
-        this.tail = this.tail.previous;
-        this.tail.next = null;
+        this._tail = this._tail.previous;
+        this._tail.next = null;
     } else {
+        var element = this._at(atPos);
         element.previous.next = element.next;
         element.next.previous = element.previous;
     }
     
     this._length--;
-    return this.toString();
 };
